@@ -1,0 +1,22 @@
+[build]
+  publish = "public"
+
+[build.environment]
+  NODE_VERSION = "18"
+
+# Netlify Functions proxying to Railway/Render backend
+# If you deploy backend separately, set API_URL in Netlify env vars
+# and uncomment the [[redirects]] below:
+#
+# [[redirects]]
+#   from = "/api/*"
+#   to = "https://YOUR_BACKEND_URL/api/:splat"
+#   status = 200
+#   force = true
+
+# For local Netlify Dev, forward API calls to local Python server
+[dev]
+  command = "python -m uvicorn main:app --reload --port 8000"
+  targetPort = 8000
+  port = 8888
+  publish = "public"

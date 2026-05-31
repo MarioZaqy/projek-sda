@@ -1,0 +1,12 @@
+# Railway deployment config
+# This runs the FastAPI server that serves BOTH the API and static files
+
+[build]
+builder = "nixpacks"
+
+[deploy]
+startCommand = "uvicorn main:app --host 0.0.0.0 --port $PORT"
+healthcheckPath = "/api"
+healthcheckTimeout = 300
+restartPolicyType = "on_failure"
+restartPolicyMaxRetries = 10
