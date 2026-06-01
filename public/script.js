@@ -3,7 +3,7 @@
 ─────────────────────────────── */
 // Saat localhost → pakai port 8000 (server lokal)
 // Saat sudah di-deploy → pakai URL yang sama (relatif)
-const API_BASE = "https://web-production-0ec46.up.railway.app";
+const API_BASE = "https://web-production-d8b04.up.railway.app";
   window.location.hostname === 'localhost' ||
   window.location.hostname === '127.0.0.1'
     ? 'http://127.0.0.1:8000'
