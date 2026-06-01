@@ -28,249 +28,129 @@
     </p>
   </header>
 
-  <!-- TAB SWITCHER -->
-  <div class="tab-switcher">
-    <button class="tab-btn active" id="tab-btn-original" onclick="switchTab('original')">
-      🗺️ Rute Evakuasi
-    </button>
-    <button class="tab-btn" id="tab-btn-custom" onclick="switchTab('custom')">
-      ✏️ Graf Kustom
-    </button>
-  </div>
+  <div class="main-grid">
 
-  <!-- ══════════════════════════════════════════
-       TAB PANEL 1 — Rute Evakuasi (original)
-  ══════════════════════════════════════════ -->
-  <div class="tab-panel" id="panel-original">
-    <div class="main-grid">
+    <!-- KOLOM KIRI: Form kontrol + legenda -->
+    <div>
 
-      <!-- KOLOM KIRI: Form kontrol + legenda -->
-      <div>
+      <!-- Card: Pilih Rute -->
+      <div class="card card--control anim-delay-1" style="margin-bottom: 1.5rem;">
+        <p class="card__title">Pilih Rute</p>
 
-        <!-- Card: Pilih Rute -->
-        <div class="card card--control anim-delay-1" style="margin-bottom: 1.5rem;">
-          <p class="card__title">Pilih Rute</p>
-
-          <!-- Badge algoritma -->
-          <div class="algo-tags">
-            <span class="algo-tag bfs">BFS</span>
-            <span class="algo-tag dfs">DFS</span>
-            <span class="algo-tag bfs-opt">BFS Optimal</span>
-            <span class="algo-tag dfs-opt">DFS Optimal</span>
-          </div>
-
-          <!-- Chip indikator shelter -->
-          <p class="form-label">Shelter tersedia:</p>
-          <div class="shelter-chips" id="shelter-chips">
-            <span class="chip" data-shelter="A">A</span>
-            <span class="chip" data-shelter="B">B</span>
-            <span class="chip" data-shelter="C">C</span>
-            <span class="chip" data-shelter="D">D</span>
-            <span class="chip" data-shelter="E">E</span>
-            <span class="chip" data-shelter="F">F</span>
-            <span class="chip" data-shelter="G">G</span>
-          </div>
-
-          <!-- Pesan error -->
-          <div class="error-msg" id="error-msg"></div>
-
-          <!-- Dropdown shelter awal -->
-          <div class="form-group">
-            <label class="form-label" for="select-start">🟣 Shelter Awal</label>
-            <select class="form-select" id="select-start">
-              <option value="">— Pilih shelter awal —</option>
-              <option value="A">A</option>
-              <option value="B">B</option>
-              <option value="C">C</option>
-              <option value="D">D</option>
-              <option value="E">E</option>
-              <option value="F">F</option>
-              <option value="G">G</option>
-            </select>
-          </div>
-
-          <!-- Dropdown shelter tujuan -->
-          <div class="form-group">
-            <label class="form-label" for="select-end">🩷 Shelter Tujuan</label>
-            <select class="form-select" id="select-end">
-              <option value="">— Pilih shelter tujuan —</option>
-              <option value="A">A</option>
-              <option value="B">B</option>
-              <option value="C">C</option>
-              <option value="D">D</option>
-              <option value="E">E</option>
-              <option value="F">F</option>
-              <option value="G">G</option>
-            </select>
-          </div>
-
-          <!-- Tombol cari -->
-          <button class="btn-primary" id="btn-find" onclick="findRoute()">
-            <span class="spinner"></span>
-            <span class="btn-text">🔍 Temukan Rute</span>
-          </button>
+        <!-- Badge algoritma -->
+        <div class="algo-tags">
+          <span class="algo-tag bfs">BFS</span>
+          <span class="algo-tag dfs">DFS</span>
+          <span class="algo-tag bfs-opt">BFS Optimal</span>
+          <span class="algo-tag dfs-opt">DFS Optimal</span>
         </div>
 
-        <!-- Card: Legenda warna -->
-        <div class="card anim-delay-2">
-          <p class="card__title">Legenda Graph</p>
-          <div class="legend">
-            <div class="legend-item">
-              <div class="legend-dot" style="background:#6c63ff;box-shadow:0 0 6px #6c63ff"></div>
-              Start
-            </div>
-            <div class="legend-item">
-              <div class="legend-dot" style="background:#f472b6;box-shadow:0 0 6px #f472b6"></div>
-              End
-            </div>
-            <div class="legend-item">
-              <div class="legend-dot" style="background:#22d3ee;box-shadow:0 0 6px #22d3ee"></div>
-              Jalur aktif
-            </div>
-            <div class="legend-item">
-              <div class="legend-dot" style="background:#64748b"></div>
-              Shelter biasa
-            </div>
-            <div class="legend-item">
-              <div class="legend-dot" style="background:rgba(255,255,255,0.15)"></div>
-              Koneksi
-            </div>
+        <!-- Chip indikator shelter -->
+        <p class="form-label">Shelter tersedia:</p>
+        <div class="shelter-chips" id="shelter-chips">
+          <span class="chip" data-shelter="A">A</span>
+          <span class="chip" data-shelter="B">B</span>
+          <span class="chip" data-shelter="C">C</span>
+          <span class="chip" data-shelter="D">D</span>
+          <span class="chip" data-shelter="E">E</span>
+          <span class="chip" data-shelter="F">F</span>
+          <span class="chip" data-shelter="G">G</span>
+        </div>
+
+        <!-- Pesan error -->
+        <div class="error-msg" id="error-msg"></div>
+
+        <!-- Dropdown shelter awal -->
+        <div class="form-group">
+          <label class="form-label" for="select-start">🟣 Shelter Awal</label>
+          <select class="form-select" id="select-start">
+            <option value="">— Pilih shelter awal —</option>
+            <option value="A">A</option>
+            <option value="B">B</option>
+            <option value="C">C</option>
+            <option value="D">D</option>
+            <option value="E">E</option>
+            <option value="F">F</option>
+            <option value="G">G</option>
+          </select>
+        </div>
+
+        <!-- Dropdown shelter tujuan -->
+        <div class="form-group">
+          <label class="form-label" for="select-end">🩷 Shelter Tujuan</label>
+          <select class="form-select" id="select-end">
+            <option value="">— Pilih shelter tujuan —</option>
+            <option value="A">A</option>
+            <option value="B">B</option>
+            <option value="C">C</option>
+            <option value="D">D</option>
+            <option value="E">E</option>
+            <option value="F">F</option>
+            <option value="G">G</option>
+          </select>
+        </div>
+
+        <!-- Tombol cari -->
+        <button class="btn-primary" id="btn-find" onclick="findRoute()">
+          <span class="spinner"></span>
+          <span class="btn-text">🔍 Temukan Rute</span>
+        </button>
+      </div>
+
+      <!-- Card: Legenda warna -->
+      <div class="card anim-delay-2">
+        <p class="card__title">Legenda Graph</p>
+        <div class="legend">
+          <div class="legend-item">
+            <div class="legend-dot" style="background:#6c63ff;box-shadow:0 0 6px #6c63ff"></div>
+            Start
           </div>
-          <p style="font-size:0.75rem;color:var(--text-muted);margin-top:0.75rem;line-height:1.6;">
-            Angka pada garis menunjukkan jarak antar shelter dalam <strong>km</strong>.
+          <div class="legend-item">
+            <div class="legend-dot" style="background:#f472b6;box-shadow:0 0 6px #f472b6"></div>
+            End
+          </div>
+          <div class="legend-item">
+            <div class="legend-dot" style="background:#22d3ee;box-shadow:0 0 6px #22d3ee"></div>
+            Jalur aktif
+          </div>
+          <div class="legend-item">
+            <div class="legend-dot" style="background:#64748b"></div>
+            Shelter biasa
+          </div>
+          <div class="legend-item">
+            <div class="legend-dot" style="background:rgba(255,255,255,0.15)"></div>
+            Koneksi
+          </div>
+        </div>
+        <p style="font-size:0.75rem;color:var(--text-muted);margin-top:0.75rem;line-height:1.6;">
+          Angka pada garis menunjukkan jarak antar shelter dalam <strong>km</strong>.
+        </p>
+      </div>
+
+    </div>
+
+    <!-- KOLOM KANAN: Visualisasi graf + hasil -->
+    <div>
+
+      <!-- Card: Kanvas graf -->
+      <div class="card card--graph anim-delay-2" style="margin-bottom: 1.5rem;">
+        <p class="card__title">Visualisasi Graf</p>
+        <div class="graph-container">
+          <canvas id="graph-canvas"></canvas>
+        </div>
+      </div>
+
+      <!-- Area hasil pencarian (diisi oleh script.js) -->
+      <div id="results-container">
+        <div class="empty-state">
+          <div class="empty-state__icon">🔎</div>
+          <p class="empty-state__text">
+            Pilih shelter awal &amp; tujuan, lalu klik<br>
+            <strong>"Temukan Rute"</strong> untuk melihat hasil.
           </p>
         </div>
-
       </div>
 
-      <!-- KOLOM KANAN: Visualisasi graf + hasil -->
-      <div>
-
-        <!-- Card: Kanvas graf -->
-        <div class="card card--graph anim-delay-2" style="margin-bottom: 1.5rem;">
-          <p class="card__title">Visualisasi Graf</p>
-          <div class="graph-container">
-            <canvas id="graph-canvas"></canvas>
-          </div>
-        </div>
-
-        <!-- Area hasil pencarian (diisi oleh script.js) -->
-        <div id="results-container">
-          <div class="empty-state">
-            <div class="empty-state__icon">🔎</div>
-            <p class="empty-state__text">
-              Pilih shelter awal &amp; tujuan, lalu klik<br>
-              <strong>"Temukan Rute"</strong> untuk melihat hasil.
-            </p>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </div>
-
-  <!-- ══════════════════════════════════════════
-       TAB PANEL 2 — Graf Kustom
-  ══════════════════════════════════════════ -->
-  <div class="tab-panel hidden" id="panel-custom">
-    <div class="main-grid">
-
-      <!-- KOLOM KIRI: Form kustom -->
-      <div>
-
-        <!-- Card: Tambah Shelter -->
-        <div class="card card--control anim-delay-1" style="margin-bottom: 1.5rem;">
-          <p class="card__title">Tambah Shelter</p>
-          <div class="input-row">
-            <input class="form-input" id="input-node-name" type="text"
-              placeholder="Nama shelter (cth: Shelter 1)" maxlength="20" />
-            <button class="btn-add" id="btn-add-node" onclick="addCustomNode()">+ Tambah</button>
-          </div>
-          <p class="form-label" style="margin-top:1.25rem;">Shelter ditambahkan:</p>
-          <div id="custom-node-list" class="item-list">
-            <p class="list-empty">Belum ada shelter.</p>
-          </div>
-        </div>
-
-        <!-- Card: Tambah Koneksi -->
-        <div class="card card--control anim-delay-2" style="margin-bottom: 1.5rem;">
-          <p class="card__title">Tambah Koneksi</p>
-          <div class="form-group">
-            <label class="form-label" for="custom-edge-from">Dari Shelter</label>
-            <select class="form-select" id="custom-edge-from">
-              <option value="">— Pilih shelter —</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="custom-edge-to">Ke Shelter</label>
-            <select class="form-select" id="custom-edge-to">
-              <option value="">— Pilih shelter —</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="custom-edge-dist">Jarak (km)</label>
-            <input class="form-input" id="custom-edge-dist" type="number"
-              min="0.1" step="0.1" placeholder="cth: 1.5" />
-          </div>
-          <button class="btn-add" style="width:100%" id="btn-add-edge" onclick="addCustomEdge()">
-            + Tambah Koneksi
-          </button>
-          <p class="form-label" style="margin-top:1.25rem;">Koneksi ditambahkan:</p>
-          <div id="custom-edge-list" class="item-list">
-            <p class="list-empty">Belum ada koneksi.</p>
-          </div>
-        </div>
-
-        <!-- Card: Cari Rute Kustom -->
-        <div class="card card--control anim-delay-3">
-          <p class="card__title">Cari Rute Kustom</p>
-          <div class="error-msg" id="custom-error-msg"></div>
-          <div class="form-group">
-            <label class="form-label" for="custom-select-start">🟣 Shelter Awal</label>
-            <select class="form-select" id="custom-select-start">
-              <option value="">— Pilih shelter awal —</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="custom-select-end">🩷 Shelter Tujuan</label>
-            <select class="form-select" id="custom-select-end">
-              <option value="">— Pilih shelter tujuan —</option>
-            </select>
-          </div>
-          <button class="btn-primary" id="btn-custom-find" onclick="findCustomRoute()">
-            <span class="spinner"></span>
-            <span class="btn-text">🔍 Temukan Rute</span>
-          </button>
-          <button class="btn-reset" id="btn-reset-graph" onclick="resetCustomGraph()">
-            🗑️ Reset Graf
-          </button>
-        </div>
-
-      </div>
-
-      <!-- KOLOM KANAN: Custom canvas + hasil -->
-      <div>
-
-        <!-- Card: Kanvas graf kustom -->
-        <div class="card card--graph anim-delay-2" style="margin-bottom: 1.5rem;">
-          <p class="card__title">Visualisasi Graf Kustom</p>
-          <div class="graph-container">
-            <canvas id="custom-graph-canvas"></canvas>
-          </div>
-        </div>
-
-        <!-- Area hasil pencarian kustom -->
-        <div id="custom-results-container">
-          <div class="empty-state">
-            <div class="empty-state__icon">✏️</div>
-            <p class="empty-state__text">
-              Tambahkan shelter &amp; koneksi, pilih rute,<br>
-              lalu klik <strong>"Temukan Rute"</strong> untuk melihat hasil.
-            </p>
-          </div>
-        </div>
-
-      </div>
     </div>
   </div>
 
