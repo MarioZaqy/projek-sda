@@ -157,17 +157,7 @@ class RouteResponse(BaseModel):
     edges: list[dict]
 
 
-class CustomEdgeInput(BaseModel):
-    node_from: str
-    node_to: str
-    distance: float
 
-
-class CustomRouteRequest(BaseModel):
-    start: str
-    end: str
-    nodes: list[str]
-    edges: list[CustomEdgeInput]
 
 
 # ── API Routes (must be before static mount) ──
@@ -238,59 +228,6 @@ def find_routes(req: RouteRequest):
     )
 
 
-@app.post("/api/custom-route", response_model=RouteResponse)
-def find_custom_routes(req: CustomRouteRequest):
-    """
-    Mencari rute pada graf kustom yang didefinisikan pengguna
-    menggunakan 4 algoritma: BFS, DFS, BFS Optimal, DFS Optimal.
-    """
-    start = req.start.strip()
-    end   = req.end.strip()
-
-    if start not in req.nodes:
-        from fastapi import HTTPException
-        raise HTTPException(status_code=400, detail=f"Shelter '{start}' tidak valid.")
-    if end not in req.nodes:
-        from fastapi import HTTPException
-        raise HTTPException(status_code=400, detail=f"Shelter '{end}' tidak valid.")
-    if start == end:
-        from fastapi import HTTPException
-        raise HTTPException(status_code=400, detail="Shelter awal dan tujuan tidak boleh sama.")
-
-    g = Graph()
-    edges_dict = []
-    for e in req.edges:
-        g.add_edge(e.node_from, e.node_to, e.distance)
-        edges_dict.append({"from": e.node_from, "to": e.node_to, "distance": e.distance})
-
-    algorithms = [
-        ("BFS",         g.bfs),
-        ("DFS",         g.dfs),
-        ("BFS Optimal", g.bfs_modified),
-        ("DFS Optimal", g.dfs_modified),
-    ]
-
-    results: list[RouteResult] = []
-    for name, fn in algorithms:
-        path, dist = fn(start, end)
-        found = path is not None
-        results.append(
-            RouteResult(
-                algorithm=name,
-                path=path,
-                total_distance=round(dist, 2) if found else 0.0,
-                path_string=" \u2192 ".join(path) if found else "Rute tidak ditemukan",
-                found=found,
-            )
-        )
-
-    return RouteResponse(
-        start=start,
-        end=end,
-        results=results,
-        shelters=req.nodes,
-        edges=edges_dict,
-    )
 
 
 # ── Serve Static Frontend ──────────────────────
